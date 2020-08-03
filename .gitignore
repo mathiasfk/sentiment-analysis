@@ -1,2 +1,8 @@
 #Authentication tokens
 auth.json
+
+#SonarQube
+.scannerwork
+
+#VSCode
+.vscode

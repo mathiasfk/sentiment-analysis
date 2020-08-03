@@ -2,6 +2,11 @@ import tweepy
 from textblob import TextBlob
 import json
 import argparse
+import signal
+import sys
+from colorit import Colors, init_colorit, color
+
+NEUTRAL_THRESHOLD = 0.1
 
 def main():
 
@@ -27,6 +32,8 @@ def main():
     count = 0
     count_pos = 0
     count_neg = 0
+    
+    init_colorit()
 
     while(True):
         tweets = api.search(args.search_text)
@@ -57,7 +64,23 @@ def read_json(path):
         return json.load(f)
 
 def display_info(ts, polarity, avg, count_pos, count_neg, count):
-    print('{0}\t Polarity:{1}\tAvg: {2}\tPos:{3}\tNeg:{4}\tTot:{5}'.format(ts, polarity, avg, count_pos, count_neg, count))
+    print('{0}\t Polarity:{1}\tAvg:{2}\tPos:{3}\tNeg:{4}\tTot:{5}'.format(ts, color_text(round(polarity,2)), color_text(round(avg,2)), count_pos, count_neg, count))
+
+def color_text(val):
+    if(val < -NEUTRAL_THRESHOLD):
+        return color(val, Colors.red)
+    if(val > NEUTRAL_THRESHOLD):
+        return color(val, Colors.green)
+    else:
+        return color(val, Colors.yellow)
+
+
+
+def signal_handler(sig, frame):
+    print('Bye!')
+    sys.exit(0)
+
+signal.signal(signal.SIGINT, signal_handler)
 
 if __name__ == "__main__":
     main()
