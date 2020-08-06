@@ -3,6 +3,7 @@ auth.json
 
 #SonarQube
 .scannerwork
+sonar-scanner.sh
 
 #VSCode
 .vscode
