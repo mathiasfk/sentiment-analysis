@@ -30,3 +30,9 @@ python src/cli.py -s "Jair Bolsonaro" -t
 ```
 
 Note that both Google Translate API and Twitter API have request rate limits, so the program might not work after passing that limit.
+
+## Unit Tests
+
+```
+py.test
+```

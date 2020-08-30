@@ -4,6 +4,13 @@ auth.json
 #SonarQube
 .scannerwork
 sonar-scanner.sh
+coverage.xml
 
 #VSCode
 .vscode
+
+#Tests
+*/__pycache__
+.pytest_cache
+.coverage
+*.pyc

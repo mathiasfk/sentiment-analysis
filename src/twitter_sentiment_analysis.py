@@ -27,7 +27,7 @@ class TwitterSentimentAnalysis:
         stream.filter(track=[search_text], is_async=True)
 
 
-def analyze_sentiment(text, enable_translation):
+def analyze_sentiment(text, enable_translation=False):
     blob = TextBlob(text)
     if enable_translation and blob.detect_language() != 'en':
         translation = TextBlob(str(blob.translate(to='en')))
